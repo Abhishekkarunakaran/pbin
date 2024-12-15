@@ -1,0 +1,5 @@
+# all shell scripts
+*.sh
+
+.vscode/
+__debug_bin*
