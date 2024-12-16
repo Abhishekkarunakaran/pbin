@@ -21,11 +21,6 @@ type service struct {
 	repository ports.Repository
 }
 
-// GetContent implements ports.Service.
-func (s *service) GetContent(ctx context.Context, dataRequest *domain.DataRequest) (*domain.Content, error) {
-	panic("unimplemented")
-}
-
 func NewPbinService(repo ports.Repository) ports.Service {
 	return &service{
 		repository: repo,
@@ -77,9 +72,9 @@ func (s *service) SaveContent(ctx context.Context, payload *domain.Payload) (uui
 
 	//4. save the data
 	data := domain.Data{
-		Password:  hashedPassword,
-		Content:   cipherText,
-		CreatedAt: time.Now().Unix(),
+		Password:  string(hashedPassword),
+		Content:   string(cipherText),
+		CreatedAt: int(time.Now().Unix()),
 	}
 
 	if err = s.repository.AddData(ctx, id, data); err != nil {
@@ -89,4 +84,44 @@ func (s *service) SaveContent(ctx context.Context, payload *domain.Payload) (uui
 
 	// 5. return the generated uuid
 	return id, nil
+}
+
+func (s *service) GetContent(ctx context.Context, dataRequest *domain.DataRequest) (*domain.Content, error) {
+	//1. get data from the db
+	data, err := s.repository.GetData(ctx, dataRequest.Id)
+	if err != nil {
+		log.Error(err.Error())
+		return nil, ErrGetData
+	}
+	//2. compare the password throw error if not matched
+	if err = bcrypt.CompareHashAndPassword([]byte(data.Password),[]byte(dataRequest.Password)); err != nil{
+		log.Error(err.Error())
+		return nil, ErrIncorrectPassword
+	}
+	//3. Decrypt the content using the password
+	key := pbkdf2.Key([]byte(dataRequest.Password), []byte(constants.Env.Salt), 1024, 32, sha256.New)
+
+
+	block, err := aes.NewCipher(key)
+	if err != nil {
+		log.Error(err.Error())
+		return nil, ErrGenBlock
+	}
+	gcm, err := cipher.NewGCM(block)
+	if err != nil {
+		log.Error(err.Error())
+		return nil, ErrGenGCM
+	}
+
+	nonceSize := gcm.NonceSize()
+	nonce, cipherText := data.Content[:nonceSize],data.Content[nonceSize:]
+
+	plainText, err := gcm.Open(nil, []byte(nonce),[]byte(cipherText),nil)
+	if err != nil {
+		log.Error(err.Error())
+		return nil, ErrDecrypting
+	}
+	// 4. return the content
+	content := domain.Content(string(plainText))
+	return &content, nil
 }
