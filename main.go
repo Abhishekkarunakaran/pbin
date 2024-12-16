@@ -44,6 +44,7 @@ func main() {
 	private := app.Group(apiUrl + "/private")
 
 	private.POST("", handler.PasteData)
+	private.GET("/:id", handler.GetData)
 
 	webapp := app.Group(baseUrl)
 	webapp.GET("", func(e echo.Context) error {
@@ -56,5 +57,5 @@ func main() {
 		return nil
 	})
 
-	app.Logger.Fatal(app.Start(":"+constants.Env.AppPort))
+	app.Logger.Fatal(app.Start(":" + constants.Env.AppPort))
 }

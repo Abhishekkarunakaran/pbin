@@ -29,14 +29,14 @@ type ReplyPayload struct {
 }
 
 type Data struct {
-	Password  []byte `json:"password"`
-	Content   []byte `json:"content"`
-	CreatedAt int64  `json:"createdat"`
+	Password  string `redis:"password"`
+	Content   string `redis:"content"`
+	CreatedAt int  `redis:"createdAt"`
 }
-
 
 type DataRequest struct {
 	Id uuid.UUID `param:"id"`
+	Password string `query:"password"`
 }
 
 type Content string

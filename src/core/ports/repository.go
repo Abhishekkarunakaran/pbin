@@ -9,6 +9,5 @@ import (
 
 type Repository interface {
 	AddData(ctx context.Context, id uuid.UUID, data domain.Data) error
-	GetPasswordHash(ctx context.Context, id uuid.UUID) ([]byte, error)
-	GetData(ctx context.Context, id uuid.UUID) (domain.Data, error)
+	GetData(ctx context.Context, id uuid.UUID) (*domain.Data, error)
 }

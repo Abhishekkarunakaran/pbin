@@ -9,4 +9,7 @@ var (
 	ErrGenGCM   = errors.New("failed to generate gcm for the ciphe block")
 	ErrGenNonce = errors.New("failed to generate random nonce")
 	ErrSaveData = errors.New("failed to save the data")
+	ErrGetData = errors.New("failed to get data from db")
+	ErrIncorrectPassword = errors.New("password hash and entered password is not matching")
+	ErrDecrypting = errors.New("failed to decrypt the content")
 )
