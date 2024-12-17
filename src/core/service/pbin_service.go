@@ -121,7 +121,13 @@ func (s *service) GetContent(ctx context.Context, dataRequest *domain.DataReques
 		log.Error(err.Error())
 		return nil, ErrDecrypting
 	}
-	// 4. return the content
+	// 4. remove the data from the db
+	err = s.repository.RemoveData(ctx,dataRequest.Id)
+	if err != nil {
+		log.Error(err.Error())
+	}
+	
+	// 5. return the content
 	content := domain.Content(string(plainText))
 	return &content, nil
 }
