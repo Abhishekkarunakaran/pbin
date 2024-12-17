@@ -17,6 +17,7 @@ type repository struct {
 	client *redis.Client
 }
 
+
 func NewRepository(client *redis.Client) ports.Repository {
 	return &repository{
 		client: client,
@@ -49,10 +50,19 @@ func (r *repository) GetData(ctx context.Context, id uuid.UUID) (*domain.Data, e
 	if err != nil {
 		log.Error(err.Error())
 		if err == redis.Nil {
-			return nil,ErrValueDoesntExist
+			return nil, ErrValueDoesntExist
 		}
 		return nil, ErrFetchValue
 	}
 
 	return &data, nil
+}
+
+func (r *repository) RemoveData(ctx context.Context, id uuid.UUID) error {
+	err := r.client.Del(ctx,id.String()).Err()
+	if err != nil {
+		log.Error(err.Error())
+		return ErrRemove
+	}
+	return nil
 }
