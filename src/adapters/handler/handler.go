@@ -7,6 +7,7 @@ import (
 
 	log "log/slog"
 
+	"github.com/Abhishekkarunakaran/pbin/src/core/constants"
 	"github.com/Abhishekkarunakaran/pbin/src/core/domain"
 	"github.com/Abhishekkarunakaran/pbin/src/core/ports"
 	"github.com/Abhishekkarunakaran/pbin/src/core/service"
@@ -43,7 +44,7 @@ func (h *handler) PasteData(e echo.Context) error {
 		log.Error(err.Error())
 		return e.JSON(http.StatusInternalServerError, err.Error())
 	}
-	return e.String(http.StatusOK,fmt.Sprintf("http://localhost:4000/app/%s",id.String()))
+	return e.String(http.StatusOK,fmt.Sprintf("http://localhost:%s/app/%s",constants.Env.AppPort,id.String()))
 }
 
 // GetData implements ports.Handler.
