@@ -1,0 +1,75 @@
+package view
+
+templ Home() {
+    <html>
+    <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pbin</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="/app/style.css">
+        <script src="https://unpkg.com/htmx.org@2.0.4"></script>
+        <script src="https://unpkg.com/htmx.org/dist/ext/json-enc.js"></script>
+       
+    </head>
+    <body>
+        <div class="row">
+        <div class="column">
+        <form class="form-group"
+        hx-target="#resultTab"
+        hx-swap="innerHTML"
+        hx-post="/app/pasteData"
+        hx-ext="json-enc">
+         <label>Enter the content:</label>
+            @textField()
+            <br>
+            <label>Enter password:</label>
+            @passField()
+            <br>
+            @generateLinkButton()
+            <br>
+        </form>
+        </div>
+        <div class="column">
+        <label>Generated Link:</label>
+        @resultTab()
+        <br>
+        @copyToClipboardButton()
+        </div>
+        </div>
+         <script src="/app/index.js"></script>
+    </body>
+</html>
+}
+
+
+
+templ textField() {
+    <textarea type="text" name="content" 
+    required></textarea>
+}
+
+templ passField() {
+    <input type="text" 
+        name="password" 
+        required 
+        minlength="8" 
+        pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$" 
+        placeholder="At least 8 characters with letters and numbers">
+
+}
+
+templ generateLinkButton() {
+    <button class="button" type="submit">Generate Link</button>
+}
+
+templ copyToClipboardButton() {
+    <button class="button" type="button" onclick="copyContent()">Copy to Clipboard</button>
+}
+
+templ resultTab() {
+    <div
+    id="resultTab"> </div>
+}

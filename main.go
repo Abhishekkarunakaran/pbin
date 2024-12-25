@@ -1,33 +1,17 @@
 package main
 
 import (
-	"html/template"
-	"io"
-	log "log/slog"
-	"net/http"
-
 	"github.com/Abhishekkarunakaran/pbin/src/adapters/handler"
 	"github.com/Abhishekkarunakaran/pbin/src/adapters/redis"
 	"github.com/Abhishekkarunakaran/pbin/src/core/constants"
 	"github.com/Abhishekkarunakaran/pbin/src/core/service"
+	"github.com/Abhishekkarunakaran/pbin/src/view"
 	"github.com/labstack/echo/v4"
 )
 
-type TemplateRenderer struct {
-	templates *template.Template
-}
-
-func (t *TemplateRenderer) Render(w io.Writer, name string, data any, c echo.Context) error {
-	if viewContext, isMap := data.(map[string]any); isMap {
-		viewContext["reverse"] = c.Echo().Reverse
-	}
-	return t.templates.ExecuteTemplate(w, name, data)
-
-}
 func main() {
 
-	baseUrl := "pbin/app"
-	apiUrl := "pbin/v1"
+	baseUrl := "/app"
 	app := echo.New()
 
 	conn := redis.GetConnection()
@@ -35,27 +19,18 @@ func main() {
 	service := service.NewPbinService(redisRepo)
 	handler := handler.NewHandler(service)
 
-	renderer := &TemplateRenderer{
-		templates: template.Must(template.ParseGlob("src/view/*.html")),
-	}
-
-	app.Renderer = renderer
-
-	private := app.Group(apiUrl + "/private")
-
-	private.POST("", handler.PasteData)
-	private.GET("/:id", handler.GetData)
-
 	webapp := app.Group(baseUrl)
-	webapp.GET("", func(e echo.Context) error {
-		if err := e.Render(http.StatusOK, "index", map[string]string{
-			"name": "Lorem Ipsum",
-		}); err != nil {
-			log.Error(err.Error())
-			return err
-		}
-		return nil
+	webapp.File("/style.css", "./src/view/style/style.css")
+	webapp.File("/index.js","./src/view/script/index.js")
+
+	home := view.Home()
+
+	webapp.GET("", func(c echo.Context) error {
+		return home.Render(c.Request().Context(), c.Response())
 	})
+
+	webapp.POST("/pasteData", handler.PasteData)
+	
 
 	app.Logger.Fatal(app.Start(":" + constants.Env.AppPort))
 }

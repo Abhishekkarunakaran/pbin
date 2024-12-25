@@ -1,0 +1,96 @@
+
+* {
+  margin: 0;
+  padding: 0;
+  background-color: #36383E;
+  color: rgb(255, 255, 255);
+  font-family: 'JetBrains Mono', monospace;
+}
+
+
+label {
+  margin-top: 15px;
+}
+
+.row {
+    display: flex;
+    height: 100%;
+    flex-wrap: wrap; /* Allows columns to wrap to the next line */
+  }
+  
+  .column {
+    flex: 1; /* Distribute space equally */
+    max-width: 50%; /* Default: each column takes 50% width */
+    box-sizing: border-box; /* Include padding/borders in the width */
+    padding-top: 100px;
+    padding-left: 40px;
+    justify-content: center;
+  }
+
+  
+  @media screen and (max-width: 600px) {
+    .column {
+      max-width: 100%; /* Full width for each column on small screens */
+    }
+  }
+  
+  /* Form Styles */
+.form-group {
+  /* position: relative; */
+  display: flex;
+  flex-direction: column; 
+}
+
+/* Button Styles */
+button {
+  width: 50%;
+  background-color: #4A7AE2;
+  box-sizing: border-box;
+  border-radius: 4px;
+  padding: 5px 5px;
+  margin-top: 15px;
+  border: none;
+  color: #fff;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.2s;
+}
+
+button:hover {
+  background-color: #3C6CD9; /* Slightly darker shade on hover */
+  transform: translateY(-2px); /* Lift the button slightly */
+}
+
+button:active {
+  background-color: #345CB2; /* Even darker shade on click */
+  transform: translateY(0); /* Reset the position */
+}
+
+/* Input and Textarea Styles */
+textarea, input {
+  font-family: 'Poppins', sans-serif;
+  background-color: #454850;
+  width: 95%;
+  box-sizing: border-box;
+  padding: 12px;
+  margin-top: 10px;
+  border: 1px solid #222;
+  border-radius: 4px;
+  resize: none;
+  font-size: small;
+}
+
+textarea {
+  height: 200px;
+}
+
+#resultTab {
+  font-family: 'Poppins', sans-serif;
+  background-color: #454850;
+  width: 90%;
+  box-sizing: border-box;
+  padding: 12px;
+  margin-top: 10px;
+  border: 1px solid #222;
+  border-radius: 4px; 
+  font-size: small;
+}

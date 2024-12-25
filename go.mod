@@ -1,11 +1,15 @@
 module github.com/Abhishekkarunakaran/pbin
 
-go 1.19
+go 1.21
+
+toolchain go1.23.4
 
 require (
 	github.com/labstack/echo/v4 v4.13.2
 	github.com/redis/go-redis/v9 v9.7.0
 )
+
+require github.com/a-h/templ v0.2.793 // indirect
 
 require (
 	github.com/cespare/xxhash/v2 v2.2.0 // indirect

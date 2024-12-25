@@ -2,6 +2,7 @@ package handler
 
 import (
 	"errors"
+	"fmt"
 	"net/http"
 
 	log "log/slog"
@@ -9,7 +10,6 @@ import (
 	"github.com/Abhishekkarunakaran/pbin/src/core/domain"
 	"github.com/Abhishekkarunakaran/pbin/src/core/ports"
 	"github.com/Abhishekkarunakaran/pbin/src/core/service"
-	"github.com/gofrs/uuid"
 	"github.com/labstack/echo/v4"
 )
 
@@ -43,11 +43,7 @@ func (h *handler) PasteData(e echo.Context) error {
 		log.Error(err.Error())
 		return e.JSON(http.StatusInternalServerError, err.Error())
 	}
-
-	return e.JSON(http.StatusOK, map[string]uuid.UUID{
-		"id": id,
-	})
-
+	return e.String(http.StatusOK,fmt.Sprintf("http://localhost:4000/app/%s",id.String()))
 }
 
 // GetData implements ports.Handler.
