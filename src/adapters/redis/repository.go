@@ -17,7 +17,6 @@ type repository struct {
 	client *redis.Client
 }
 
-
 func NewRepository(client *redis.Client) ports.Repository {
 	return &repository{
 		client: client,
@@ -59,7 +58,7 @@ func (r *repository) GetData(ctx context.Context, id uuid.UUID) (*domain.Data, e
 }
 
 func (r *repository) RemoveData(ctx context.Context, id uuid.UUID) error {
-	err := r.client.Del(ctx,id.String()).Err()
+	err := r.client.Del(ctx, id.String()).Err()
 	if err != nil {
 		log.Error(err.Error())
 		return ErrRemove
@@ -68,7 +67,7 @@ func (r *repository) RemoveData(ctx context.Context, id uuid.UUID) error {
 }
 
 func (r *repository) IsContentPresent(ctx context.Context, id uuid.UUID) bool {
-	val := r.client.Exists(ctx,id.String())
+	val := r.client.Exists(ctx, id.String())
 	if val.Val() == 1 {
 		return true
 	}

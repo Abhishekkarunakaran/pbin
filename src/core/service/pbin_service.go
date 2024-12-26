@@ -98,13 +98,12 @@ func (s *service) GetContent(ctx context.Context, dataRequest *domain.DataReques
 		return nil, ErrGetDataAbsent
 	}
 	//2. compare the password throw error if not matched
-	if err = bcrypt.CompareHashAndPassword([]byte(data.Password),[]byte(dataRequest.Password)); err != nil{
+	if err = bcrypt.CompareHashAndPassword([]byte(data.Password), []byte(dataRequest.Password)); err != nil {
 		log.Error(err.Error())
 		return nil, ErrIncorrectPassword
 	}
 	//3. Decrypt the content using the password
 	key := pbkdf2.Key([]byte(dataRequest.Password), []byte(constants.Env.Salt), 1024, 32, sha256.New)
-
 
 	block, err := aes.NewCipher(key)
 	if err != nil {
@@ -118,24 +117,24 @@ func (s *service) GetContent(ctx context.Context, dataRequest *domain.DataReques
 	}
 
 	nonceSize := gcm.NonceSize()
-	nonce, cipherText := data.Content[:nonceSize],data.Content[nonceSize:]
+	nonce, cipherText := data.Content[:nonceSize], data.Content[nonceSize:]
 
-	plainText, err := gcm.Open(nil, []byte(nonce),[]byte(cipherText),nil)
+	plainText, err := gcm.Open(nil, []byte(nonce), []byte(cipherText), nil)
 	if err != nil {
 		log.Error(err.Error())
 		return nil, ErrDecrypting
 	}
 	// 4. remove the data from the db
-	err = s.repository.RemoveData(ctx,dataRequest.Id)
+	err = s.repository.RemoveData(ctx, dataRequest.Id)
 	if err != nil {
 		log.Error(err.Error())
 	}
-	
+
 	// 5. return the content
 	content := domain.Content(string(plainText))
 	return &content, nil
 }
 
 func (s *service) IsContentPresent(ctx context.Context, id uuid.UUID) bool {
-	return s.repository.IsContentPresent(ctx,id)
+	return s.repository.IsContentPresent(ctx, id)
 }
