@@ -31,12 +31,12 @@ type ReplyPayload struct {
 type Data struct {
 	Password  string `redis:"password"`
 	Content   string `redis:"content"`
-	CreatedAt int  `redis:"createdAt"`
+	CreatedAt int    `redis:"createdAt"`
 }
 
 type DataRequest struct {
-	Id uuid.UUID `param:"id"`
-	Password string `query:"password"`
+	Id       uuid.UUID `param:"id"`
+	Password string    `query:"password"`
 }
 
 type Content string

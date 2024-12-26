@@ -45,7 +45,7 @@ func (h *handler) PasteData(e echo.Context) error {
 		log.Error(err.Error())
 		return e.JSON(http.StatusInternalServerError, err.Error())
 	}
-	return e.String(http.StatusOK,fmt.Sprintf("http://localhost:%s/app/%s",constants.Env.AppPort,id.String()))
+	return e.String(http.StatusOK, fmt.Sprintf("http://localhost:%s/app/%s", constants.Env.AppPort, id.String()))
 }
 
 // GetData implements ports.Handler.
@@ -59,23 +59,23 @@ func (h *handler) GetData(e echo.Context) error {
 		log.Error(err.Error())
 		return e.JSON(http.StatusBadRequest, err.Error())
 	}
-	content ,err := h.service.GetContent(ctx, &dataRequest)
+	content, err := h.service.GetContent(ctx, &dataRequest)
 	if err != nil {
 		log.Error(err.Error())
 		switch {
-		case errors.Is(err, service.ErrIncorrectPassword) :
-			return e.JSON(http.StatusBadRequest,"Incorrect password")
-		case errors.Is(err, service.ErrGetDataAbsent) :
-			return e.JSON(http.StatusNotFound,"")
+		case errors.Is(err, service.ErrIncorrectPassword):
+			return e.JSON(http.StatusBadRequest, "Incorrect password")
+		case errors.Is(err, service.ErrGetDataAbsent):
+			return e.JSON(http.StatusNotFound, "")
 		default:
-			return e.JSON(http.StatusInternalServerError,err.Error())
+			return e.JSON(http.StatusInternalServerError, err.Error())
 		}
 	}
-	return e.String(http.StatusOK,content.String())
+	return e.String(http.StatusOK, content.String())
 }
 
-func (h *handler) IsDataPresent(e echo.Context,id string) bool {
+func (h *handler) IsDataPresent(e echo.Context, id string) bool {
 	ctx := e.Request().Context()
 	hashId := uuid.FromStringOrNil(id)
-	return h.service.IsContentPresent(ctx,hashId)
+	return h.service.IsContentPresent(ctx, hashId)
 }
