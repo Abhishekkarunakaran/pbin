@@ -11,6 +11,7 @@ import (
 	"github.com/Abhishekkarunakaran/pbin/src/core/domain"
 	"github.com/Abhishekkarunakaran/pbin/src/core/ports"
 	"github.com/Abhishekkarunakaran/pbin/src/core/service"
+	"github.com/gofrs/uuid"
 	"github.com/labstack/echo/v4"
 )
 
@@ -61,11 +62,20 @@ func (h *handler) GetData(e echo.Context) error {
 	content ,err := h.service.GetContent(ctx, &dataRequest)
 	if err != nil {
 		log.Error(err.Error())
-		if errors.Is(err, service.ErrIncorrectPassword) {
+		switch {
+		case errors.Is(err, service.ErrIncorrectPassword) :
 			return e.JSON(http.StatusBadRequest,"Incorrect password")
+		case errors.Is(err, service.ErrGetDataAbsent) :
+			return e.JSON(http.StatusNotFound,"")
+		default:
+			return e.JSON(http.StatusInternalServerError,err.Error())
 		}
-		return e.JSON(http.StatusInternalServerError,err.Error())
 	}
+	return e.String(http.StatusOK,content.String())
+}
 
-	return e.JSON(http.StatusOK,content)
+func (h *handler) IsDataPresent(e echo.Context,id string) bool {
+	ctx := e.Request().Context()
+	hashId := uuid.FromStringOrNil(id)
+	return h.service.IsContentPresent(ctx,hashId)
 }

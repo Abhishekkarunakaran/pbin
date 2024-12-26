@@ -93,6 +93,10 @@ func (s *service) GetContent(ctx context.Context, dataRequest *domain.DataReques
 		log.Error(err.Error())
 		return nil, ErrGetData
 	}
+	if stringIsEmpty(data.Password) {
+		log.Error("Data is absent")
+		return nil, ErrGetDataAbsent
+	}
 	//2. compare the password throw error if not matched
 	if err = bcrypt.CompareHashAndPassword([]byte(data.Password),[]byte(dataRequest.Password)); err != nil{
 		log.Error(err.Error())
@@ -130,4 +134,8 @@ func (s *service) GetContent(ctx context.Context, dataRequest *domain.DataReques
 	// 5. return the content
 	content := domain.Content(string(plainText))
 	return &content, nil
+}
+
+func (s *service) IsContentPresent(ctx context.Context, id uuid.UUID) bool {
+	return s.repository.IsContentPresent(ctx,id)
 }

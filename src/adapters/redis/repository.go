@@ -66,3 +66,12 @@ func (r *repository) RemoveData(ctx context.Context, id uuid.UUID) error {
 	}
 	return nil
 }
+
+func (r *repository) IsContentPresent(ctx context.Context, id uuid.UUID) bool {
+	val := r.client.Exists(ctx,id.String())
+	if val.Val() == 1 {
+		return true
+	}
+	log.Error("content doesn't exists")
+	return false
+}

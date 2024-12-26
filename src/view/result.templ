@@ -1,0 +1,53 @@
+package view
+
+
+templ ResultPage(id string) {
+    <html>
+    <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pbin</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="/app/style.css">
+        <script src="https://unpkg.com/htmx.org@2.0.4"></script>
+        <script src="https://unpkg.com/htmx.org/dist/ext/json-enc.js"></script>
+       
+    </head>
+    <body>
+        <div class="row">
+        <div class="column">
+        <form class="form-group"
+        hx-target="#resultTab"
+        hx-swap="innerHTML"
+        hx-get={"/app/getContent/"+id}
+        hx-ext="json-enc">
+            <label>Enter password:</label>
+            @passField()
+            <br>
+            @decryptButton()
+            <br>
+        </form>
+        </div>
+        <div class="column">
+        <label>Decrypted content:</label>
+        @decryptContentTab()
+        <br>
+        @copyToClipboardButton()
+        </div>
+        </div>
+         <script src="/app/index.js"></script>
+    </body>
+</html>
+}
+
+templ decryptButton() {
+    <button class="button" type="submit">Decrypt</button>
+}
+
+
+templ decryptContentTab() {
+    <div
+    id="resultTab"> </div>
+}

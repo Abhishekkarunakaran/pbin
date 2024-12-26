@@ -7,4 +7,5 @@ import (
 type Handler interface {
 	PasteData(e echo.Context) error
 	GetData(e echo.Context) error
+	IsDataPresent(e echo.Context, id string) bool
 }

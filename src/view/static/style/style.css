@@ -38,7 +38,7 @@ label {
 .form-group {
   /* position: relative; */
   display: flex;
-  flex-direction: column; 
+  flex-direction: column;
 }
 
 /* Button Styles */
@@ -93,4 +93,24 @@ textarea {
   border: 1px solid #222;
   border-radius: 4px; 
   font-size: small;
+}
+
+/* NotFoundPage Specific Styles */
+.notfound {
+  display: flex;
+  flex-direction: column; /* Stack content vertically */
+  justify-content: center; /* Center vertically */
+  align-items: center; /* Center horizontally */
+  text-align: center;
+  height: 100vh; /* Full viewport height */
+}
+
+.notfound h1 {
+  font-size: 6rem;
+  margin-bottom: 1rem;
+}
+
+.notfound h3 {
+  font-size: 1.5rem;
+  margin: 0.5rem 0;
 }

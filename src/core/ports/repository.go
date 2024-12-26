@@ -11,4 +11,5 @@ type Repository interface {
 	AddData(ctx context.Context, id uuid.UUID, data domain.Data) error
 	GetData(ctx context.Context, id uuid.UUID) (*domain.Data, error)
 	RemoveData(ctx context.Context, id uuid.UUID) error
+	IsContentPresent(ctx context.Context, id uuid.UUID) bool
 }
