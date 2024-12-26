@@ -7,12 +7,14 @@ import (
 
 	"github.com/Abhishekkarunakaran/pbin/src/core/domain"
 	"github.com/Abhishekkarunakaran/pbin/src/core/ports/mock_ports"
+	"github.com/gofrs/uuid"
 	"github.com/stretchr/testify/assert"
 	"go.uber.org/mock/gomock"
 )
 
 func TestSaveContent(t *testing.T) {
 	ctrl := gomock.NewController(t)
+	defer ctrl.Finish()
 	mockRepo := mock_ports.NewMockRepository(ctrl)
 
 	testCases := []struct {
@@ -54,7 +56,7 @@ func TestSaveContent(t *testing.T) {
 
 func TestGetContent(t *testing.T) {
 	ctrl := gomock.NewController(t)
-	defer ctrl.Finish() // Ensure all expectations are met
+	defer ctrl.Finish()
 	mockRepo := mock_ports.NewMockRepository(ctrl)
 
 	testCases := []struct {
@@ -113,5 +115,43 @@ func TestGetContent(t *testing.T) {
 				assert.NotNil(t, content)
 			}
 		})
+	}
+}
+
+func TestIsContentPresent(t *testing.T) {
+	ctrl := gomock.NewController(t)
+	defer ctrl.Finish()
+	mockRepo := mock_ports.NewMockRepository(ctrl)
+
+	testCases := []struct {
+			name        string
+			id          uuid.UUID
+			mockResult bool
+			expectedResult bool
+	}{
+			{
+					name:        "Content Present",
+					id:          uuid.FromStringOrNil("10d0acc5-b88b-40c1-9e7f-738b9adf2dee"),
+					mockResult: true,
+					expectedResult: true,
+			},
+			{
+					name:        "Content Not Present",
+					id:          uuid.FromStringOrNil("10d0acc5-b88b-40c1-9e7f-738b9adf2dee"),
+					mockResult: false,
+					expectedResult: false,
+			},
+	}
+
+	s := NewPbinService(mockRepo)
+
+	for _, tc := range testCases {
+			t.Run(tc.name, func(t *testing.T) {
+					mockRepo.EXPECT().IsContentPresent(gomock.Any(), tc.id).Return(tc.mockResult)
+
+					result := s.IsContentPresent(context.Background(), tc.id)
+
+					assert.Equal(t, tc.expectedResult, result)
+			})
 	}
 }
