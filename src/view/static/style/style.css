@@ -7,6 +7,13 @@
   font-family: 'JetBrains Mono', monospace;
 }
 
+html,body {
+  height:100%;
+  display: flex;
+  flex-direction: column;
+  overflow-x: hidden;
+}
+
 
 label {
   margin-top: 15px;
@@ -22,7 +29,7 @@ label {
     flex: 1; /* Distribute space equally */
     max-width: 50%; /* Default: each column takes 50% width */
     box-sizing: border-box; /* Include padding/borders in the width */
-    padding-top: 100px;
+    padding-top: 60px;
     padding-left: 40px;
     justify-content: center;
   }
@@ -113,4 +120,19 @@ textarea {
 .notfound h3 {
   font-size: 1.5rem;
   margin: 0.5rem 0;
+}
+
+footer {
+  color: #222;
+  text-align: center;
+  padding: 10px;
+  position: sticky;
+  width: 100%;
+  background-color: rgb(231, 231, 205);
+}
+
+header {
+  padding: 20px 20px;
+  background-color: #36383E;
+  box-shadow: 0 4px 8px #00000013;
 }
