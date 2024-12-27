@@ -14,6 +14,7 @@ WORKDIR /app
 
 COPY --from=builder /app/pbin/ .
 COPY src/view/static/ /app/src/view/static/
+COPY images/    /app/images/
 EXPOSE ${APP_PORT}
 
 CMD ["./pbin"]

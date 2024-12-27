@@ -22,7 +22,7 @@ func main() {
 	webapp := app.Group(baseUrl)
 	webapp.File("/style.css", "./src/view/static/style/style.css")
 	webapp.File("/index.js", "./src/view/static/script/index.js")
-	// webapp.Static("/static","./src/view/static")
+	webapp.Static("/images", "./images")
 
 	webapp.GET("", func(c echo.Context) error {
 		home := view.Home()

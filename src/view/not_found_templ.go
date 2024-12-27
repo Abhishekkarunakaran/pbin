@@ -29,7 +29,7 @@ func NotFoundPage() templ.Component {
 			templ_7745c5c3_Var1 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<html><head><meta charset=\"UTF-8\"><meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\"><title>Pbin</title><link rel=\"preconnect\" href=\"https://fonts.googleapis.com\"><link rel=\"preconnect\" href=\"https://fonts.gstatic.com\" crossorigin><link href=\"https://fonts.googleapis.com/css2?family=JetBrains+Mono&amp;display=swap\" rel=\"stylesheet\"><link rel=\"stylesheet\" href=\"/app/style.css\"></head><body><div class=\"notfound\"><h1>404</h1><br><h3>Content not found</h3><br><h3>or</h3><br><h3>Already consumed</h3></div></body></html>")
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<html><head><meta charset=\"UTF-8\"><meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\"><title>Pbin</title><link rel=\"preconnect\" href=\"https://fonts.googleapis.com\"><link rel=\"preconnect\" href=\"https://fonts.gstatic.com\" crossorigin><link href=\"https://fonts.googleapis.com/css2?family=JetBrains+Mono&amp;display=swap\" rel=\"stylesheet\"><link rel=\"stylesheet\" href=\"/app/style.css\"></head><body><header><img src=\"/app/images/logo.png\" alt=\"logo\" height=\"20px\"></header><div class=\"notfound\"><h1>404</h1><br><h3>Content not found</h3><br><h3>or</h3><br><h3>Already consumed</h3></div><footer>Made with HTMX, GO & 💙</footer></body></html>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}

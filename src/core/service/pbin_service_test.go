@@ -109,7 +109,7 @@ func TestGetContent(t *testing.T) {
 
 			if testCase.wantErr {
 				assert.ErrorIs(t, err, testCase.expectedErr)
-				assert.Nil(t, content) 
+				assert.Nil(t, content)
 			} else {
 				assert.NoError(t, err)
 				assert.NotNil(t, content)
@@ -124,34 +124,34 @@ func TestIsContentPresent(t *testing.T) {
 	mockRepo := mock_ports.NewMockRepository(ctrl)
 
 	testCases := []struct {
-			name        string
-			id          uuid.UUID
-			mockResult bool
-			expectedResult bool
+		name           string
+		id             uuid.UUID
+		mockResult     bool
+		expectedResult bool
 	}{
-			{
-					name:        "Content Present",
-					id:          uuid.FromStringOrNil("10d0acc5-b88b-40c1-9e7f-738b9adf2dee"),
-					mockResult: true,
-					expectedResult: true,
-			},
-			{
-					name:        "Content Not Present",
-					id:          uuid.FromStringOrNil("10d0acc5-b88b-40c1-9e7f-738b9adf2dee"),
-					mockResult: false,
-					expectedResult: false,
-			},
+		{
+			name:           "Content Present",
+			id:             uuid.FromStringOrNil("10d0acc5-b88b-40c1-9e7f-738b9adf2dee"),
+			mockResult:     true,
+			expectedResult: true,
+		},
+		{
+			name:           "Content Not Present",
+			id:             uuid.FromStringOrNil("10d0acc5-b88b-40c1-9e7f-738b9adf2dee"),
+			mockResult:     false,
+			expectedResult: false,
+		},
 	}
 
 	s := NewPbinService(mockRepo)
 
 	for _, tc := range testCases {
-			t.Run(tc.name, func(t *testing.T) {
-					mockRepo.EXPECT().IsContentPresent(gomock.Any(), tc.id).Return(tc.mockResult)
+		t.Run(tc.name, func(t *testing.T) {
+			mockRepo.EXPECT().IsContentPresent(gomock.Any(), tc.id).Return(tc.mockResult)
 
-					result := s.IsContentPresent(context.Background(), tc.id)
+			result := s.IsContentPresent(context.Background(), tc.id)
 
-					assert.Equal(t, tc.expectedResult, result)
-			})
+			assert.Equal(t, tc.expectedResult, result)
+		})
 	}
 }
