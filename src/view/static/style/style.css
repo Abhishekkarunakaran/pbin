@@ -140,3 +140,8 @@ header {
 .container {
   flex: 1;
 }
+
+.declare {
+  margin-top: 20px;
+  font-size: small;
+}

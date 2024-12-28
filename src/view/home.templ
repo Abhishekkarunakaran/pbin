@@ -3,16 +3,7 @@ package view
 templ Home() {
     <html>
     <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pbin</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono&display=swap" rel="stylesheet">
-        <link rel="stylesheet" href="/app/style.css">
-        <script src="https://unpkg.com/htmx.org@2.0.4"></script>
-        <script src="https://unpkg.com/htmx.org/dist/ext/json-enc.js"></script>
-       
+    @headerData()
     </head>
     <body>
     <header>
@@ -41,6 +32,8 @@ templ Home() {
         @resultTab()
         <br>
         @copyToClipboardButton()
+        <br>
+        <p class="declare">*link will expire in 1 hr.</p>
         </div>
         </div>
         </main>
@@ -72,7 +65,7 @@ templ generateLinkButton() {
 }
 
 templ copyToClipboardButton() {
-    <button class="button" type="button" onclick="copyContent()">Copy to Clipboard</button>
+    <button class="button" id="copyButton" type="button" onclick="copyContent()">Copy to Clipboard</button>
 }
 
 templ resultTab() {
@@ -84,4 +77,22 @@ templ footerText() {
     Self-hosted using a laptop connected to internet.<br>
     Made with HTMX, GO & 💙
     </footer>
+}
+
+templ headerData() {
+    @commonHeader()
+    <script src="https://unpkg.com/htmx.org@2.0.4"></script>
+    <script src="https://unpkg.com/htmx.org/dist/ext/json-enc.js"></script>
+}
+
+
+templ commonHeader() {
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pbin</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/app/style.css">  
+    <link  rel="icon" href="/app/images/favicon.ico" type="image/x-icon">
 }
