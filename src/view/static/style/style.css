@@ -126,13 +126,17 @@ footer {
   color: #222;
   text-align: center;
   padding: 10px;
-  position: sticky;
   width: 100%;
   background-color: rgb(231, 231, 205);
+  margin-top: 50px;
 }
 
 header {
   padding: 20px 20px;
   background-color: #36383E;
   box-shadow: 0 4px 8px #00000013;
+}
+
+.container {
+  flex: 1;
 }
