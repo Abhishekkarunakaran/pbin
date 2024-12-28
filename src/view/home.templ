@@ -44,10 +44,7 @@ templ Home() {
         </div>
         </div>
         </main>
-    <footer>
-    Self-hosted using a laptop connected to internet.<br>
-    Made with HTMX, GO & 💙
-    </footer>
+    @footerText()
     <script src="/app/index.js"></script>
     </body>
 </html>
@@ -80,4 +77,11 @@ templ copyToClipboardButton() {
 
 templ resultTab() {
     <div id="resultTab"> </div>
+}
+
+templ footerText() {
+    <footer>
+    Self-hosted using a laptop connected to internet.<br>
+    Made with HTMX, GO & 💙
+    </footer>
 }
