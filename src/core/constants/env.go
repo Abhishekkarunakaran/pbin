@@ -19,6 +19,7 @@ type env struct {
 	RedisTTL      string
 	RedisDB       string
 	Salt          string
+	BaseURL       string
 }
 
 func init() {
@@ -39,6 +40,7 @@ func loadEnv() {
 		"REDIS_TTL":      &Env.RedisTTL,
 		"REDIS_PASSWORD": &Env.RedisPassword,
 		"SALT":           &Env.Salt,
+		"BASE_URL":       &Env.BaseURL,
 	}
 
 	for key, value := range envmap {
