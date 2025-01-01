@@ -37,14 +37,14 @@ func ResultPage(id string) templ.Component {
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</head><body><header><img src=\"/app/images/logo.png\" alt=\"logo\" height=\"20px\"></header><div class=\"row\"><div class=\"column\"><form class=\"form-group\" hx-target=\"#resultTab\" hx-swap=\"innerHTML\" hx-get=\"")
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</head><body><header><img src=\"/images/logo.png\" alt=\"logo\" height=\"20px\"></header><div class=\"row\"><div class=\"column\"><form class=\"form-group\" hx-target=\"#resultTab\" hx-swap=\"innerHTML\" hx-get=\"")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
 		var templ_7745c5c3_Var2 string
-		templ_7745c5c3_Var2, templ_7745c5c3_Err = templ.JoinStringErrs("/app/getContent/" + id)
+		templ_7745c5c3_Var2, templ_7745c5c3_Err = templ.JoinStringErrs("/getContent/" + id)
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `src/view/result.templ`, Line: 18, Col: 37}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `src/view/result.templ`, Line: 18, Col: 33}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var2))
 		if templ_7745c5c3_Err != nil {
@@ -82,7 +82,7 @@ func ResultPage(id string) templ.Component {
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</div></div><script src=\"/app/index.js\"></script>")
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</div></div><script src=\"/index.js\"></script>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}

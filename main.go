@@ -11,7 +11,6 @@ import (
 
 func main() {
 
-	baseUrl := "/app"
 	app := echo.New()
 
 	conn := redis.GetConnection()
@@ -19,19 +18,18 @@ func main() {
 	service := service.NewPbinService(redisRepo)
 	handler := handler.NewHandler(service)
 
-	webapp := app.Group(baseUrl)
-	webapp.File("/style.css", "./src/view/static/style/style.css")
-	webapp.File("/index.js", "./src/view/static/script/index.js")
-	webapp.Static("/images", "./images")
+	app.File("/style.css", "./src/view/static/style/style.css")
+	app.File("/index.js", "./src/view/static/script/index.js")
+	app.Static("/images", "./images")
 
-	webapp.GET("", func(c echo.Context) error {
+	app.GET("", func(c echo.Context) error {
 		home := view.Home()
 		return home.Render(c.Request().Context(), c.Response())
 	})
 
-	webapp.POST("/pasteData", handler.PasteData)
+	app.POST("/pasteData", handler.PasteData)
 
-	webapp.GET("/:id", func(c echo.Context) error {
+	app.GET("/:id", func(c echo.Context) error {
 		id := c.Param("id")
 		if handler.IsDataPresent(c, id) {
 			result := view.ResultPage(id)
@@ -41,7 +39,7 @@ func main() {
 		return notFound.Render(c.Request().Context(), c.Response())
 	})
 
-	webapp.GET("/getContent/:id", handler.GetData)
+	app.GET("/getContent/:id", handler.GetData)
 
 	app.Logger.Fatal(app.Start(":" + constants.Env.AppPort))
 }

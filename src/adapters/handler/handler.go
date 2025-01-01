@@ -45,7 +45,7 @@ func (h *handler) PasteData(e echo.Context) error {
 		log.Error(err.Error())
 		return e.JSON(http.StatusInternalServerError, err.Error())
 	}
-	return e.String(http.StatusOK, fmt.Sprintf("%s/app/%s", constants.Env.BaseURL, id.String()))
+	return e.String(http.StatusOK, fmt.Sprintf("%s/%s", constants.Env.BaseURL, id.String()))
 }
 
 // GetData implements ports.Handler.

@@ -8,14 +8,14 @@ templ ResultPage(id string) {
     </head>
     <body>
       <header>
-        <img src="/app/images/logo.png" alt="logo" height="20px">
+        <img src="/images/logo.png" alt="logo" height="20px">
     </header>
         <div class="row">
         <div class="column">
         <form class="form-group"
         hx-target="#resultTab"
         hx-swap="innerHTML"
-        hx-get={"/app/getContent/"+id}
+        hx-get={"/getContent/"+id}
         hx-ext="json-enc">
             <label>Enter password:</label>
             @passField()
@@ -31,7 +31,7 @@ templ ResultPage(id string) {
         @copyToClipboardButton()
         </div>
         </div>
-         <script src="/app/index.js"></script>
+         <script src="/index.js"></script>
     @footerText()
     </body>
 </html>

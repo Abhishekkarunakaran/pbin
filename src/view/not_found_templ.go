@@ -37,7 +37,7 @@ func NotFoundPage() templ.Component {
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</head><body><header><img src=\"/app/images/logo.png\" alt=\"logo\" height=\"20px\"></header><div class=\"notfound\"><h1>404</h1><br><h3>Content not found</h3><br><h3>or</h3><br><h3>Already consumed</h3></div>")
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</head><body><header><img src=\"/images/logo.png\" alt=\"logo\" height=\"20px\"></header><div class=\"notfound\"><h1>404</h1><br><h3>Content not found</h3><br><h3>or</h3><br><h3>Already consumed</h3></div>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}

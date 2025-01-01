@@ -7,7 +7,7 @@ templ Home() {
     </head>
     <body>
     <header>
-        <img src="/app/images/logo.png" alt="logo" height="20px">
+        <img src="/images/logo.png" alt="logo" height="20px">
     </header>
         <main class="container">
         <div class="row">
@@ -15,7 +15,7 @@ templ Home() {
         <form class="form-group"
         hx-target="#resultTab"
         hx-swap="innerHTML"
-        hx-post="/app/pasteData"
+        hx-post="/pasteData"
         hx-ext="json-enc">
          <label>Enter the content:</label>
             @textField()
@@ -38,7 +38,7 @@ templ Home() {
         </div>
         </main>
     @footerText()
-    <script src="/app/index.js"></script>
+    <script src="/index.js"></script>
     </body>
 </html>
 }
@@ -93,6 +93,6 @@ templ commonHeader() {
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/app/style.css">  
-    <link  rel="icon" href="/app/images/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="/style.css">  
+    <link  rel="icon" href="/images/favicon.ico" type="image/x-icon">
 }

@@ -37,7 +37,7 @@ func Home() templ.Component {
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</head><body><header><img src=\"/app/images/logo.png\" alt=\"logo\" height=\"20px\"></header><main class=\"container\"><div class=\"row\"><div class=\"column\"><form class=\"form-group\" hx-target=\"#resultTab\" hx-swap=\"innerHTML\" hx-post=\"/app/pasteData\" hx-ext=\"json-enc\"><label>Enter the content:</label>")
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</head><body><header><img src=\"/images/logo.png\" alt=\"logo\" height=\"20px\"></header><main class=\"container\"><div class=\"row\"><div class=\"column\"><form class=\"form-group\" hx-target=\"#resultTab\" hx-swap=\"innerHTML\" hx-post=\"/pasteData\" hx-ext=\"json-enc\"><label>Enter the content:</label>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -85,7 +85,7 @@ func Home() templ.Component {
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<script src=\"/app/index.js\"></script></body></html>")
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<script src=\"/index.js\"></script></body></html>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -321,7 +321,7 @@ func commonHeader() templ.Component {
 			templ_7745c5c3_Var9 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<meta charset=\"UTF-8\"><meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\"><title>Pbin</title><link rel=\"preconnect\" href=\"https://fonts.googleapis.com\"><link rel=\"preconnect\" href=\"https://fonts.gstatic.com\" crossorigin><link href=\"https://fonts.googleapis.com/css2?family=JetBrains+Mono&amp;display=swap\" rel=\"stylesheet\"><link rel=\"stylesheet\" href=\"/app/style.css\"><link rel=\"icon\" href=\"/app/images/favicon.ico\" type=\"image/x-icon\">")
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<meta charset=\"UTF-8\"><meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\"><title>Pbin</title><link rel=\"preconnect\" href=\"https://fonts.googleapis.com\"><link rel=\"preconnect\" href=\"https://fonts.gstatic.com\" crossorigin><link href=\"https://fonts.googleapis.com/css2?family=JetBrains+Mono&amp;display=swap\" rel=\"stylesheet\"><link rel=\"stylesheet\" href=\"/style.css\"><link rel=\"icon\" href=\"/images/favicon.ico\" type=\"image/x-icon\">")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
